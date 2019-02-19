@@ -7,13 +7,13 @@
 Simple application to provide the output of 'net user %username /do' in a quick and easy to use interface.
 
 
-## Requirements 
+# Requirements 
 
-# To compile
+### To compile
 
 * Visual Studio 2017 (Community is fine)
 * dotNet 4.5 SDK
 
-# To Run
+### To Run
 
 * dotNet 4.5 runtime files
