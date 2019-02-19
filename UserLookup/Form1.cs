@@ -1,5 +1,7 @@
 ﻿// APP ICON FROM https://visualpharm.com/free-icons/search-595b40b85ba036ed117daa18
-
+//
+// TO DO:
+// * Parse results
 
 using System;
 using System.Collections.Generic;
@@ -22,46 +24,40 @@ namespace UserLookup
         Process process = new Process();
         static StringBuilder sb = new StringBuilder();
 
-
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            lookupOutput.Text = null; // Wipe Existing data
-
+            lookupOutput.Text = null; 
             if (userName.Text != "")
             {
                 var user = userName.Text;
-
+                // Check that the username contains no invalid characters
                 if (user.All(x => char.IsLetterOrDigit(x) || char.IsWhiteSpace(x)) == false)
-                    
                 {
                     lookupOutput.Text = "Username should be alpha-numerical only";
                     return;
                 }
 
-
+                // Do some clearing before starting
                 lookupOutput.Text = null;
                 sb.Clear();
 
+                // Create our new process for the net.exe client
                 Process process = new Process();
-                
-                
                 process.EnableRaisingEvents = true;
-                process.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_OutputDataReceived);
-                process.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_ErrorDataReceived);
-                process.Exited += new System.EventHandler(process_Exited);
-
+                process.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_OutputDataReceived); // Output handler
+                process.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(process_ErrorDataReceived); // Error handler
+                process.Exited += new System.EventHandler(process_Exited); // Exit handler 
                 process.StartInfo.FileName = "net.exe";
-                process.StartInfo.Arguments = "user " + user + " /do";
+                process.StartInfo.Arguments = "user " + user + " /do";  // Hardcoded to execute /do for now
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.CreateNoWindow = true;  // hide the process, user does not need to see the black CMD screen.
                 lookupOutput.Text = "Please Wait..";  // This is only useful if net user takes ages to return the data, otherwise it's usually instant.
                 process.Start();
                 process.BeginErrorReadLine();
@@ -75,49 +71,43 @@ namespace UserLookup
                 //    output_list.Items.Add(copiedFileName);
                 // }
 
-
-                //We want to run some code after the process has exited so we WaitForExit
+                // We want to run some code after the process has exited so we WaitForExit.
+                // Note in some situations this can make the app appear frozen.
                 process.WaitForExit();
-                lookupOutput.Text = null; // Clear the output so Please Wait... is gone.
+
+                // Some quick spring cleaning
+                lookupOutput.Text = null; 
                 user = null;
                 if (sb != null)
                 {
-                    //  lookupOutput.Text = lookupData;
+                    // Show the data
                     lookupOutput.Text = sb.ToString();
-
                 }
-                //   }
             } else
             {
+                // Username is empty.
                 lookupOutput.Text = "Please enter a username";
-                //MessageBox.Show("Enter a username");
             }
-
         }
 
         void process_Exited(object sender, EventArgs e)
         {
-          //  Console.WriteLine(string.Format("process exited with code {0}\n", process.ExitCode.ToString()));
+            // We dont need anything here for now
             //sb.AppendLine(string.Format(e.Data + "\n"));
         }
 
         void process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-         //   Console.WriteLine(e.Data + "\n");
+            // Display the error output
             sb.AppendLine(string.Format(e.Data + "\n"));
         }
 
         void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-
-            //    Debug.Print(e.Data + "\n");
-            
+            // Our data output
             sb.AppendLine(string.Format(e.Data + "\n"));
-
-            
-
         }
 
 
-        }
     }
+}
