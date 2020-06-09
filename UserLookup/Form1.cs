@@ -87,7 +87,8 @@ namespace UserLookup
 
                     
 
-
+                    // We have a Class to parse the return from net user into a user object
+                    // For more information on that refer to User.cs
 
                     User.UserData ourUser = new User.UserData();
 
