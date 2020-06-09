@@ -81,6 +81,7 @@ namespace UserLookup
                 if (sb != null)
                 {
                     // Show the data
+                    var temp = sb.ToString();
                     lookupOutput.Text = sb.ToString();
                 }
             } else
