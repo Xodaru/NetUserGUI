@@ -21,7 +21,7 @@ namespace UserLookup
 
 
     {
-        Process process = new Process();
+        User process = new User();
         static StringBuilder sb = new StringBuilder();
 
         public Form1()
@@ -80,9 +80,29 @@ namespace UserLookup
                 user = null;
                 if (sb != null)
                 {
-                    // Show the data
-                    var temp = sb.ToString();
+                 //   var temp = sb.ToString();
+                
+                    //string[] strings2 = Regex.Split(temp, Environment.NewLine);
+
+
+                    
+
+
+
+                    User.UserData ourUser = new User.UserData();
+
+
+                    if (!User.ReadUserData(sb.ToString(), ourUser)) {
+                        // NO GOOD
+                        return; // Do nothign more, lets add proper error handling sometime
+                    }
+                    // No error, so we assume ourUser is filled with lots of goodies for us to use.
+                    // Show the raw data
                     lookupOutput.Text = sb.ToString();
+
+                    // Process our other bits of data
+                    string fullName = ourUser.fullName;
+
                 }
             } else
             {
