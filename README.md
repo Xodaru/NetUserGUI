@@ -1,6 +1,7 @@
 <div align = "center">
 
 </div>
+Check the releases page for the latest binary.
 
 # Net.exe user GUI
 
