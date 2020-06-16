@@ -96,6 +96,7 @@ namespace UserLookup
                     if (!User.ReadUserData(sb.ToString(), ourUser)) {
                         // Problem was encoutnered so just show the message and finish up
                         lookupOutput.Text = ourUser.statusMessage;
+                        userNotFound.Visible = true;
                         return; // Do nothign more, lets add proper error handling sometime
                     }
 
@@ -153,6 +154,7 @@ namespace UserLookup
             peBox.Text = "";
             llBox.Text = "";
             lsBox.Text = "";
+            userNotFound.Visible = false;
 
         }
 

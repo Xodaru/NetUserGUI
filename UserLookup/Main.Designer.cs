@@ -48,13 +48,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.userNotFound = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 45);
+            this.button1.Location = new System.Drawing.Point(6, 43);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(212, 39);
             this.button1.TabIndex = 2;
@@ -81,6 +82,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.userNotFound);
             this.groupBox1.Controls.Add(this.userName);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -238,6 +240,18 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
+            // userNotFound
+            // 
+            this.userNotFound.AutoSize = true;
+            this.userNotFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNotFound.ForeColor = System.Drawing.Color.Red;
+            this.userNotFound.Location = new System.Drawing.Point(48, 84);
+            this.userNotFound.Name = "userNotFound";
+            this.userNotFound.Size = new System.Drawing.Size(120, 13);
+            this.userNotFound.TabIndex = 3;
+            this.userNotFound.Text = "Username not found";
+            this.userNotFound.Visible = false;
+            // 
             // mainWindow
             // 
             this.AcceptButton = this.button1;
@@ -286,6 +300,7 @@
         private System.Windows.Forms.TextBox plsBox;
         private System.Windows.Forms.TextBox aeBox;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label userNotFound;
     }
 }
 
